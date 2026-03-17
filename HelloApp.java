@@ -1,51 +1,48 @@
 /**
  * HelloApp.java - A simple Java application that extends the functionality of
- * HelloAppUC3 by accepting multiple names as command-line arguments and displaying
- * a personalized greeting for all names. If no names are provided, it defaults to "World".
+ * HelloAppUC4 by using an enhanced for loop to accept multiple names as 
+ * command-line arguments and displaying a personalized greeting. 
+ * If no names are provided, it defaults to "World".
  *
- * UC 1: Display "Hello World"
- * UC 2: Display User Name
- * UC 3: Provide Default Value
- * UC 4: Greet Multiple Users - The application should accept multiple names as command-line
- * arguments and display a personalized greeting for each user.
  * Usage: java HelloApp [name1] [name2] ... [nameN]
  * - If names are provided, it will display "Hello, [Name1], [Name2], ...!" to the console.
  * - If no names are provided, it will display "Hello, World!"
  *
  * @author Nafees
- * @version 4.0
+ * @version 5.0
  * @since UC1
  */
 
 /**
- * Key Concepts for HelloAppUC4:
- * 1. Default Values: Providing a fallback value when no input is given
- * 2. Command-line Arguments: Accessing user input via args[] parameter
- * 3. Conditional Statements: Using if to check conditions
- * 4. Boolean Logic: Using logical conditions to control flow
- * 5. Array Length: Checking the number of command-line arguments
- * 6. StringBuilder: Efficiently building a string from multiple parts
- * 7. Looping Constructs: Using for loops to iterate through command-line arguments
- * 8. String Concatenation: Joining multiple strings with a delimiter (comma and space)
+ * Key Concepts for HelloApp UC5:
+ * 1. Command-line Arguments: Accessing multiple user inputs via args[] parameter
+ * 2. Array Iteration: Using enhanced for loop to traverse all arguments
+ * 3. Enhanced For Loop: Simplifies iteration over arrays without manual index management
+ * 4. StringBuilder: Efficiently building a string in a loop without creating multiple immutable string objects
+ * 5. Default Values: Providing a fallback when no arguments are provided
+ * 6. String Concatenation: Building the final greeting message
  */
 public class HelloApp {
     public static void main(String[] args) {
         // Default name
-        String name = "World";
+        String finalName = "World";
 
         // Check if names are provided as command-line arguments
         if (args.length > 0) {
             StringBuilder nameBuilder = new StringBuilder();
-            for (int i = 0; i < args.length; i++) {
-                nameBuilder.append(args[i]);
-                // Add a comma and space if it's not the last name
-                if (i < args.length - 1) {
+            boolean first = true;
+            
+            // Enhanced for loop to iterate through the array
+            for (String argName : args) {
+                if (!first) {
                     nameBuilder.append(", ");
                 }
+                nameBuilder.append(argName);
+                first = false;
             }
-            name = nameBuilder.toString(); // Use the provided names
+            finalName = nameBuilder.toString(); // Use the constructed string
         }
 
-        System.out.println("Hello, " + name + "!");
+        System.out.println("Hello, " + finalName + "!");
     }
 }
