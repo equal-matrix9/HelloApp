@@ -1,7 +1,7 @@
 /**
  * HelloApp.java - A simple Java application that extends the functionality of
- * HelloAppUC4 by using an enhanced for loop to accept multiple names as 
- * command-line arguments and displaying a personalized greeting. 
+ * HelloAppUC5 by using the substring method to remove the trailing delimiter
+ * from a greeting built from multiple command-line arguments.
  * If no names are provided, it defaults to "World".
  *
  * Usage: java HelloApp [name1] [name2] ... [nameN]
@@ -9,18 +9,18 @@
  * - If no names are provided, it will display "Hello, World!"
  *
  * @author Nafees
- * @version 5.0
+ * @version 6.0
  * @since UC1
  */
 
 /**
- * Key Concepts for HelloApp UC5:
+ * Key Concepts for HelloApp UC6:
  * 1. Command-line Arguments: Accessing multiple user inputs via args[] parameter
  * 2. Array Iteration: Using enhanced for loop to traverse all arguments
  * 3. Enhanced For Loop: Simplifies iteration over arrays without manual index management
  * 4. StringBuilder: Efficiently building a string in a loop without creating multiple immutable string objects
  * 5. Default Values: Providing a fallback when no arguments are provided
- * 6. String Concatenation: Building the final greeting message
+ * 6. Substring Method: Removing the trailing delimiter using substring(0, length - 2)
  */
 public class HelloApp {
     public static void main(String[] args) {
@@ -30,17 +30,14 @@ public class HelloApp {
         // Check if names are provided as command-line arguments
         if (args.length > 0) {
             StringBuilder nameBuilder = new StringBuilder();
-            boolean first = true;
-            
-            // Enhanced for loop to iterate through the array
-            for (String argName : args) {
-                if (!first) {
-                    nameBuilder.append(", ");
-                }
-                nameBuilder.append(argName);
-                first = false;
+
+            for (String name : args) {
+                nameBuilder.append(name);
+                nameBuilder.append(", ");
             }
-            finalName = nameBuilder.toString(); // Use the constructed string
+
+            // Remove trailing ", " using substring method
+            finalName = nameBuilder.substring(0, nameBuilder.length() - 2);
         }
 
         System.out.println("Hello, " + finalName + "!");
